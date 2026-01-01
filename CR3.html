@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drive Hub | Elite Car Rental</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #0b0d11; color: white; scroll-behavior: smooth; }
+        
+        .orange-text { color: #ff5f00; }
+        .bg-orange { background-color: #ff5f00; }
+        .border-orange { border-color: #ff5f00; }
+
+        /* Custom Scrollbar for the images */
+        .image-strip::-webkit-scrollbar { height: 4px; }
+        .image-strip::-webkit-scrollbar-thumb { background: #ff5f00; border-radius: 10px; }
+
+        .car-section { border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 40px; margin-bottom: 40px; }
+        
+        /* About Section Toggle */
+        .details-box { display: none; animation: slideDown 0.3s ease-out; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body class="pb-20">
+
+    <nav class="sticky top-0 z-50 bg-[#0b0d11]/90 backdrop-blur-md p-5 border-b border-white/10 flex justify-between items-center">
+        <div class="text-xl font-black italic tracking-tighter uppercase">Drive<span class="orange-text">Hub</span></div>
+        <div class="bg-orange text-black px-3 py-1 rounded font-bold text-[10px]">PREMIUM RENTALS</div>
+    </nav>
+
+    <header class="p-8">
+        <h1 class="text-5xl font-black uppercase leading-none mb-4">Select <br><span class="orange-text">Your Gear</span></h1>
+        <p class="text-slate-500 text-sm">5 Premium Vehicles • 25+ Viewing Angles</p>
+    </header>
+
+    <div class="px-5 space-y-16">
+
+        <div class="car-section" id="car1">
+            <div class="flex items-center gap-2 mb-4">
+                <span class="bg-orange w-2 h-2 rounded-full animate-pulse"></span>
+                <h2 class="text-2xl font-black uppercase">Mahindra Thar 4x4</h2>
+            </div>
+
+            <div class="image-strip flex overflow-x-auto gap-3 pb-4 snap-x">
+                <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl border border-white/10">
+                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl border border-white/10">
+                <img src="https://images.unsplash.com/photo-1567808291548-fc3ee04dbac0?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl border border-white/10">
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl border border-white/10">
+                <img src="https://images.unsplash.com/photo-1494906104770-fef474500307?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl border border-white/10">
+            </div>
+
+            <div class="grid grid-cols-2 gap-3 mt-4">
+                <button onclick="toggleDetails('details1')" class="bg-white/5 border border-white/10 text-white py-4 rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2">
+                    <i class="fas fa-info-circle orange-text"></i> About Car
+                </button>
+                <button onclick="bookCar('Mahindra Thar', '3500')" class="bg-orange text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 shadow-lg shadow-orange/20">
+                    <i class="fas fa-calendar-check"></i> Book Now
+                </button>
+            </div>
+
+            <div id="details1" class="details-box mt-4 p-5 bg-white/5 rounded-2xl border border-white/10">
+                <h4 class="text-orange font-bold text-xs uppercase mb-2">Specifications</h4>
+                <ul class="text-xs text-slate-300 space-y-2">
+                    <li><i class="fas fa-check orange-text mr-2"></i> Diesel Engine • 4x4 Drive Train</li>
+                    <li><i class="fas fa-check orange-text mr-2"></i> Convertible Top Options Available</li>
+                    <li><i class="fas fa-check orange-text mr-2"></i> Perfect for Off-Roading & Weddings</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="car-section" id="car2">
+            <div class="flex items-center gap-2 mb-4">
+                <span class="bg-orange w-2 h-2 rounded-full animate-pulse"></span>
+                <h2 class="text-2xl font-black uppercase">Toyota Fortuner</h2>
+            </div>
+            <div class="image-strip flex overflow-x-auto gap-3 pb-4 snap-x">
+                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1567808291548-fc3ee04dbac0?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1494906104770-fef474500307?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+            </div>
+            <div class="grid grid-cols-2 gap-3 mt-4">
+                <button onclick="toggleDetails('details2')" class="bg-white/5 border border-white/10 text-white py-4 rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2">
+                    <i class="fas fa-info-circle orange-text"></i> About Car
+                </button>
+                <button onclick="bookCar('Toyota Fortuner', '5000')" class="bg-orange text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2">
+                    <i class="fas fa-calendar-check"></i> Book Now
+                </button>
+            </div>
+            <div id="details2" class="details-box mt-4 p-5 bg-white/5 rounded-2xl border border-white/10">
+                <h4 class="text-orange font-bold text-xs uppercase mb-2">Specifications</h4>
+                <p class="text-xs text-slate-400 leading-relaxed italic">The ultimate status symbol. Comes with a chauffeur option and 7-seater luxury interior.</p>
+            </div>
+        </div>
+
+        <div class="car-section" id="car3">
+            <div class="flex items-center gap-2 mb-4">
+                <span class="bg-orange w-2 h-2 rounded-full animate-pulse"></span>
+                <h2 class="text-2xl font-black uppercase">Maruti Swift</h2>
+            </div>
+            <div class="image-strip flex overflow-x-auto gap-3 pb-4 snap-x">
+                <img src="https://images.unsplash.com/photo-1567808291548-fc3ee04dbac0?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1494906104770-fef474500307?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+            </div>
+            <div class="grid grid-cols-2 gap-3 mt-4">
+                <button onclick="toggleDetails('details3')" class="bg-white/5 border border-white/10 text-white py-4 rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2">
+                    <i class="fas fa-info-circle orange-text"></i> About Car
+                </button>
+                <button onclick="bookCar('Maruti Swift', '1800')" class="bg-orange text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2">
+                    <i class="fas fa-calendar-check"></i> Book Now
+                </button>
+            </div>
+            <div id="details3" class="details-box mt-4 p-5 bg-white/5 rounded-2xl border border-white/10">
+                <p class="text-xs text-slate-400">Perfect for city drives. High mileage and easy parking. Fuel efficient petrol engine.</p>
+            </div>
+        </div>
+
+        <div class="car-section" id="car4">
+            <div class="flex items-center gap-2 mb-4">
+                <span class="bg-orange w-2 h-2 rounded-full animate-pulse"></span>
+                <h2 class="text-2xl font-black uppercase">Hyundai Creta</h2>
+            </div>
+            <div class="image-strip flex overflow-x-auto gap-3 pb-4 snap-x">
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1567808291548-fc3ee04dbac0?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1494906104770-fef474500307?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+            </div>
+            <div class="grid grid-cols-2 gap-3 mt-4">
+                <button onclick="toggleDetails('details4')" class="bg-white/5 border border-white/10 text-white py-4 rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2">
+                    <i class="fas fa-info-circle orange-text"></i> About Car
+                </button>
+                <button onclick="bookCar('Hyundai Creta', '2500')" class="bg-orange text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2">
+                    <i class="fas fa-calendar-check"></i> Book Now
+                </button>
+            </div>
+            <div id="details4" class="details-box mt-4 p-5 bg-white/5 rounded-2xl border border-white/10">
+                <p class="text-xs text-slate-400">The king of SUVs. Panoramic sunroof and automatic transmission for smooth highway cruising.</p>
+            </div>
+        </div>
+
+        <div class="car-section" id="car5">
+            <div class="flex items-center gap-2 mb-4">
+                <span class="bg-orange w-2 h-2 rounded-full animate-pulse"></span>
+                <h2 class="text-2xl font-black uppercase">Mahindra Scorpio N</h2>
+            </div>
+            <div class="image-strip flex overflow-x-auto gap-3 pb-4 snap-x">
+                <img src="https://images.unsplash.com/photo-1494906104770-fef474500307?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1567808291548-fc3ee04dbac0?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+                <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=500" class="snap-center w-[80%] aspect-video object-cover rounded-2xl">
+            </div>
+            <div class="grid grid-cols-2 gap-3 mt-4">
+                <button onclick="toggleDetails('details5')" class="bg-white/5 border border-white/10 text-white py-4 rounded-xl font-bold text-xs uppercase tracking-widest flex items-center justify-center gap-2">
+                    <i class="fas fa-info-circle orange-text"></i> About Car
+                </button>
+                <button onclick="bookCar('Scorpio N', '3200')" class="bg-orange text-white py-4 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2">
+                    <i class="fas fa-calendar-check"></i> Book Now
+                </button>
+            </div>
+            <div id="details5" class="details-box mt-4 p-5 bg-white/5 rounded-2xl border border-white/10">
+                <p class="text-xs text-slate-400">Rugged, powerful, and dominant. Best for long trips with family.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // FUNCTION TO SHOW/HIDE DETAILS
+        function toggleDetails(id) {
+            const box = document.getElementById(id);
+            const current = box.style.display;
+            // Hide all first for clean look
+            document.querySelectorAll('.details-box').forEach(d => d.style.display = 'none');
+            // Toggle clicked
+            box.style.display = (current === 'block') ? 'none' : 'block';
+        }
+
+        // FUNCTION TO BOOK VIA WHATSAPP
+        function bookCar(car, price) {
+            const num = "91XXXXXXXXXX"; // BRO ADD YOUR ACTUAL NUMBER HERE
+            const text = `*DRIVE HUB RENTAL*%0A` +
+                         `--------------------------%0A` +
+                         `*Vehicle:* ${car}%0A` +
+                         `*Price:* ₹${price}/day%0A` +
+                         `*Status:* Checking Availability%0A` +
+                         `--------------------------%0A` +
+                         `_Inquiry via Sodub Studios Demo_`;
+            window.open(`https://wa.me/${num}?text=${text}`, '_blank');
+        }
+    </script>
+</body>
+</html>

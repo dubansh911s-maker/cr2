@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life OS | Pro Tracker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap');
+        body { font-family: 'Space Grotesk', sans-serif; background: #020617; color: #f8fafc; }
+        .glass { background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.05); }
+        .hidden { display: none; }
+        .completed { text-decoration: line-through; opacity: 0.5; }
+    </style>
+</head>
+<body class="p-6">
+
+    <div id="dashboardPage">
+        <div class="flex justify-between items-center mb-8">
+            <h1 class="text-3xl font-bold tracking-tighter italic">Life<span class="text-cyan-400">OS</span></h1>
+            <button onclick="showPage('targetPage')" class="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center shadow-lg shadow-cyan-500/20">
+                <i class="fas fa-plus text-white text-sm"></i>
+            </button>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-8">
+            <div class="glass p-6 rounded-[2rem] text-center">
+                <p class="text-[10px] uppercase text-slate-500 font-bold mb-2">Daily Score</p>
+                <div class="text-3xl font-bold text-cyan-400" id="dailyPercent">0%</div>
+            </div>
+            <div class="glass p-6 rounded-[2rem] text-center">
+                <p class="text-[10px] uppercase text-slate-500 font-bold mb-2">Weekly Goal</p>
+                <div class="text-3xl font-bold text-purple-400">72%</div>
+            </div>
+        </div>
+
+        <h3 class="text-sm font-bold uppercase tracking-widest text-slate-500 mb-4">Active Targets</h3>
+        <div id="taskListDisplay" class="space-y-3">
+            </div>
+
+        <div class="mt-8 p-8 border-2 border-dashed border-slate-800 rounded-[2.5rem] text-center">
+            <p class="text-slate-500 text-sm mb-4">No more targets for today?</p>
+            <button onclick="showPage('targetPage')" class="text-cyan-400 text-xs font-bold uppercase tracking-widest">+ Create New Day</button>
+        </div>
+    </div>
+
+    <div id="targetPage" class="hidden">
+        <div class="flex items-center gap-4 mb-8">
+            <button onclick="showPage('dashboardPage')" class="text-slate-400"><i class="fas fa-arrow-left text-xl"></i></button>
+            <h1 class="text-2xl font-bold italic">New <span class="text-cyan-400">Targets</span></h1>
+        </div>
+
+        <div class="glass p-6 rounded-[2rem] mb-6">
+            <input id="targetInput" type="text" placeholder="Enter your mission..." 
+                class="w-full bg-transparent border-b border-slate-700 py-3 text-white focus:outline-none focus:border-cyan-400 placeholder:text-slate-600 mb-6">
+            
+            <button onclick="addTarget()" class="w-full bg-cyan-500 text-white py-4 rounded-2xl font-black uppercase tracking-widest text-[11px]">
+                Add to Daily List
+            </button>
+        </div>
+
+        <div id="managerList" class="space-y-3">
+            </div>
+    </div>
+
+    <script>
+        let targets = JSON.parse(localStorage.getItem('myTargets')) || [];
+
+        function showPage(pageId) {
+            document.getElementById('dashboardPage').classList.add('hidden');
+            document.getElementById('targetPage').classList.add('hidden');
+            document.getElementById(pageId).classList.remove('hidden');
+            render();
+        }
+
+        function addTarget() {
+            const input = document.getElementById('targetInput');
+            if (input.value.trim() === "") return;
+            
+            targets.push({ id: Date.now(), text: input.value, done: false });
+            input.value = "";
+            save();
+            render();
+        }
+
+        function toggleTarget(id) {
+            targets = targets.map(t => t.id === id ? { ...t, done: !t.done } : t);
+            save();
+            render();
+        }
+
+        function deleteTarget(id) {
+            targets = targets.filter(t => t.id !== id);
+            save();
+            render();
+        }
+
+        function save() {
+            localStorage.setItem('myTargets', JSON.stringify(targets));
+        }
+
+        function render() {
+            const display = document.getElementById('taskListDisplay');
+            const manager = document.getElementById('managerList');
+            const percentLabel = document.getElementById('dailyPercent');
+            
+            display.innerHTML = "";
+            manager.innerHTML = "";
+
+            let doneCount = 0;
+
+            targets.forEach(t => {
+                if(t.done) doneCount++;
+
+                // Template for Dashboard
+                display.innerHTML += `
+                    <div onclick="toggleTarget(${t.id})" class="glass p-5 rounded-2xl flex items-center justify-between cursor-pointer ${t.done ? 'border-l-4 border-cyan-500' : 'border-l-4 border-slate-700'}">
+                        <span class="${t.done ? 'completed text-slate-500' : 'text-white'} font-medium">${t.text}</span>
+                        <i class="fas ${t.done ? 'fa-check-circle text-cyan-500' : 'fa-circle text-slate-800'}"></i>
+                    </div>
+                `;
+
+                // Template for Manager
+                manager.innerHTML += `
+                    <div class="flex items-center justify-between bg-slate-900/50 p-4 rounded-xl">
+                        <span class="text-sm ${t.done ? 'line-through text-slate-600' : ''}">${t.text}</span>
+                        <button onclick="deleteTarget(${t.id})" class="text-red-900"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+            });
+
+            // Calculate Percentage
+            const percent = targets.length > 0 ? Math.round((doneCount / targets.length) * 100) : 0;
+            percentLabel.innerText = percent + "%";
+        }
+
+        // Initial Load
+        render();
+    </script>
+</body>
+</html>

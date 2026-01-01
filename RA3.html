@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Estates | Premium Inventory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        .tab-active { background: #059669 !important; color: white !important; transform: translateY(-2px); box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.2); }
+        .glass-card { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+        .property-card:hover .img-zoom { transform: scale(1.1); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+
+    <nav class="bg-white/90 backdrop-blur-md border-b sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="font-extrabold text-2xl tracking-tighter cursor-pointer flex items-center gap-2" onclick="showPage('home')">
+                <div class="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center text-white text-sm"><i class="fas fa-crown"></i></div>
+                ELITE<span class="text-emerald-600">ESTATES</span>
+            </div>
+            <div class="hidden md:flex space-x-8 text-[11px] font-black uppercase tracking-[0.2em]">
+                <button onclick="showPage('Property')" class="hover:text-emerald-600">Buy</button>
+                <button onclick="showPage('Plot')" class="hover:text-emerald-600">Plots</button>
+                <button onclick="showPage('Rent')" class="hover:text-emerald-600">Rent</button>
+            </div>
+        </div>
+    </nav>
+
+    <section id="page-home" class="animate-in fade-in duration-700">
+        <div class="relative h-[500px] flex items-center justify-center text-white overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1600" class="absolute inset-0 w-full h-full object-cover brightness-50">
+            <div class="relative z-10 text-center px-6">
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">Luxury Living in <span class="text-emerald-400">Gonda</span></h1>
+                <p class="text-lg md:text-xl text-slate-200 max-w-2xl mx-auto font-medium">The most exclusive collection of homes, plots, and premium rentals.</p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 py-20">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div onclick="showPage('Property')" class="group cursor-pointer bg-white p-10 rounded-[3rem] shadow-sm border border-slate-100 hover:shadow-2xl transition-all">
+                    <div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-all"><i class="fas fa-city"></i></div>
+                    <h2 class="text-2xl font-bold mb-3">Residential</h2>
+                    <p class="text-slate-400 text-sm mb-6">Premium villas and flats for your family.</p>
+                    <span class="text-emerald-600 font-bold text-xs uppercase">Browse Buy →</span>
+                </div>
+                <div onclick="showPage('Plot')" class="group cursor-pointer bg-white p-10 rounded-[3rem] shadow-sm border border-slate-100 hover:shadow-2xl transition-all">
+                    <div class="w-16 h-16 bg-amber-50 text-amber-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-amber-600 group-hover:text-white transition-all"><i class="fas fa-vector-square"></i></div>
+                    <h2 class="text-2xl font-bold mb-3">Investment</h2>
+                    <p class="text-slate-400 text-sm mb-6">Strategic plots with high ROI potential.</p>
+                    <span class="text-amber-600 font-bold text-xs uppercase">Browse Plots →</span>
+                </div>
+                <div onclick="showPage('Rent')" class="group cursor-pointer bg-white p-10 rounded-[3rem] shadow-sm border border-slate-100 hover:shadow-2xl transition-all">
+                    <div class="w-16 h-16 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center text-2xl mb-6 group-hover:bg-purple-600 group-hover:text-white transition-all"><i class="fas fa-key"></i></div>
+                    <h2 class="text-2xl font-bold mb-3">Rental</h2>
+                    <p class="text-slate-400 text-sm mb-6">Verified rooms and homes for rent.</p>
+                    <span class="text-purple-600 font-bold text-xs uppercase">Browse Rent →</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="page-inventory" class="hidden max-w-7xl mx-auto px-6 py-12">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-8">
+            <div class="w-full md:w-auto">
+                <button onclick="showPage('home')" class="text-slate-400 font-bold text-[10px] mb-2 uppercase tracking-widest flex items-center hover:text-emerald-600 transition">
+                    <i class="fas fa-chevron-left mr-2"></i> Main Menu
+                </button>
+                <h2 id="page-title" class="text-5xl font-extrabold tracking-tighter">Inventory</h2>
+            </div>
+            
+            <div id="rent-filter-box" class="hidden flex bg-white p-2 rounded-[1.5rem] shadow-sm border w-full md:w-auto">
+                <button id="btn-all" onclick="filterRent('all')" class="tab-active flex-1 md:flex-none px-8 py-3 rounded-xl text-[10px] font-black uppercase">All</button>
+                <button id="btn-room" onclick="filterRent('Room')" class="flex-1 md:flex-none px-8 py-3 rounded-xl text-[10px] font-black uppercase text-slate-400">Rooms</button>
+                <button id="btn-house" onclick="filterRent('Full House')" class="flex-1 md:flex-none px-8 py-3 rounded-xl text-[10px] font-black uppercase text-slate-400">House</button>
+            </div>
+        </div>
+
+        <div id="grid-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+            </div>
+    </section>
+
+    <script>
+        const CONTACT_WA = "91XXXXXXXXXX";
+        
+        const sampleData = [
+            // PROPERTIES (BUY)
+            { cat: 'Property', name: 'The Glass Mansion', price: '1.2 Cr', loc: 'Civil Lines', img: 'https://images.unsplash.com/photo-1600585154340-be6191da95b8', detail: '5 BHK', area: '4500 sqft', tag: 'Exterior' },
+            { cat: 'Property', name: 'Modern Minimalist', price: '65L', loc: 'Awas Vikas', img: 'https://images.unsplash.com/photo-1600566753190-17f0bb2a6c3e', detail: '3 BHK', area: '1800 sqft', tag: 'Interior' },
+            { cat: 'Property', name: 'Royal Residency', price: '95L', loc: 'Lucknow Highway', img: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0', detail: '4 BHK', area: '3200 sqft', tag: 'Luxury' },
+            { cat: 'Property', name: 'Skyline Penthouse', price: '2.1 Cr', loc: 'City Center', img: 'https://images.unsplash.com/photo-1512918728675-ed5a9ecdebfd', detail: '4 BHK', area: '4000 sqft', tag: 'Top Floor' },
+            { cat: 'Property', name: 'Heritage Villa', price: '75L', loc: 'Malgodown Road', img: 'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83', detail: '3 BHK', area: '2200 sqft', tag: 'Classic' },
+
+            // PLOTS
+            { cat: 'Plot', name: 'Industrial Gateway', price: '45L', loc: 'Industrial Area', img: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef', detail: '80ft Road', area: '5000 sqft', tag: 'Commercial' },
+            { cat: 'Plot', name: 'Green Valley Plot', price: '12L', loc: 'Sedona Hills', img: 'https://images.unsplash.com/photo-1593510912333-99b2283abc7a', detail: '30ft Road', area: '1000 sqft', tag: 'Residential' },
+            { cat: 'Plot', name: 'Highway Frontage', price: '80L', loc: 'Main Highway', img: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef', detail: '100ft Road', area: '1 Acre', tag: 'Investment' },
+            { cat: 'Plot', name: 'Riverview Corner', price: '30L', loc: 'Riverside Park', img: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b', detail: '40ft Road', area: '2400 sqft', tag: 'Corner' },
+            { cat: 'Plot', name: 'Township Phase 1', price: '18L', loc: 'New Gonda', img: 'https://images.unsplash.com/photo-1531834685032-c74696a67fd0', detail: '25ft Road', area: '1200 sqft', tag: 'Ready' },
+
+            // RENTALS
+            { cat: 'Rent', name: 'Elite Suite', price: '5,500', loc: 'College Square', img: 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af', detail: 'Room', area: 'Furnished', tag: 'Students' },
+            { cat: 'Rent', name: 'Family Bungalow', price: '15,000', loc: 'Civil Lines', img: 'https://images.unsplash.com/photo-1484154218962-a197022b5858', detail: 'Full House', area: '3 BHK', tag: 'Families' },
+            { cat: 'Rent', name: 'Studio Apartment', price: '8,000', loc: 'Awas Vikas', img: 'https://images.unsplash.com/photo-1536376074432-af424424aba2', detail: 'Full House', area: '1 BHK', tag: 'Modern' },
+            { cat: 'Rent', name: 'PG Premium', price: '4,000', loc: 'Near Railway St.', img: 'https://images.unsplash.com/photo-1555854816-8097a84cc71b', detail: 'Room', area: 'Includes Food', tag: 'Safe' },
+            { cat: 'Rent', name: 'Terrace Flat', price: '10,000', loc: 'Subash Nagar', img: 'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688', detail: 'Full House', area: '2 BHK', tag: 'View' }
+        ];
+
+        function showPage(category) {
+            const home = document.getElementById('page-home');
+            const inventory = document.getElementById('page-inventory');
+            const rentFilter = document.getElementById('rent-filter-box');
+
+            if(category === 'home') {
+                home.classList.remove('hidden');
+                inventory.classList.add('hidden');
+                window.scrollTo(0,0);
+                return;
+            }
+
+            home.classList.add('hidden');
+            inventory.classList.remove('hidden');
+            document.getElementById('page-title').innerText = category + " Listings";
+
+            if(category === 'Rent') rentFilter.classList.remove('hidden');
+            else rentFilter.classList.add('hidden');
+
+            renderCards(sampleData.filter(i => i.cat === category));
+            window.scrollTo(0,0);
+        }
+
+        function filterRent(type) {
+            document.querySelectorAll('#rent-filter-box button').forEach(b => {
+                b.classList.remove('tab-active');
+                b.classList.add('text-slate-400');
+            });
+            event.target.classList.add('tab-active');
+            event.target.classList.remove('text-slate-400');
+
+            const filtered = type === 'all' 
+                ? sampleData.filter(i => i.cat === 'Rent') 
+                : sampleData.filter(i => i.cat === 'Rent' && i.detail === type);
+            renderCards(filtered);
+        }
+
+        function renderCards(items) {
+            const grid = document.getElementById('grid-container');
+            grid.innerHTML = items.map(i => `
+                <div class="property-card group bg-white rounded-[2.5rem] overflow-hidden border border-slate-100 shadow-sm hover:shadow-2xl transition-all duration-500">
+                    <div class="relative h-72 overflow-hidden">
+                        <img src="${i.img}?auto=format&fit=crop&q=80&w=800" class="img-zoom w-full h-full object-cover transition duration-700">
+                        <div class="absolute top-6 right-6 bg-white/90 backdrop-blur-md px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest shadow-sm">
+                            ${i.tag}
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <p class="text-emerald-600 font-bold text-[10px] uppercase tracking-widest mb-1">${i.loc}</p>
+                                <h3 class="text-2xl font-bold text-slate-800">${i.name}</h3>
+                            </div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 mb-8">
+                            <div class="bg-slate-50 p-4 rounded-2xl">
+                                <p class="text-[9px] font-bold text-slate-400 uppercase tracking-tighter mb-1">${i.cat === 'Plot' ? 'Road' : 'Type'}</p>
+                                <p class="text-xs font-black">${i.detail}</p>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-2xl">
+                                <p class="text-[9px] font-bold text-slate-400 uppercase tracking-tighter mb-1">Area</p>
+                                <p class="text-xs font-black">${i.area}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-center pt-6 border-t border-slate-50">
+                            <div>
+                                <p class="text-[10px] font-bold text-slate-400 uppercase">Value</p>
+                                <p class="text-2xl font-black text-slate-900">₹${i.price}${i.cat === 'Rent' ? '<span class="text-sm font-normal text-slate-400">/mo</span>' : ''}</p>
+                            </div>
+                            <a href="https://wa.me/${CONTACT_WA}?text=I'm interested in ${i.name}" class="bg-slate-900 text-white w-14 h-14 rounded-2xl flex items-center justify-center hover:bg-emerald-600 transition-all shadow-lg">
+                                <i class="fab fa-whatsapp text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
